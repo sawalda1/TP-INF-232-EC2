@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Évaluation de cours</title>
+    <style>
+        body {
+            font-family: Arial;
+            background-color: #f4f6f8;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .container {
+            background: white;
+            padding: 25px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            width: 350px;
+        }
+
+        h2 {
+            text-align: center;
+        }
+
+        input {
+            width: 100%;
+            padding: 8px;
+            margin: 8px 0;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+
+        button {
+            width: 100%;
+            padding: 10px;
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        a {
+            display: block;
+            text-align: center;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+
+<body>
+<div class="container">
+
+    <h2>Évaluation d'un cours</h2>
+
+    <form method="POST" action="/submit">
+
+        <label>Cours</label>
+        <input type="text" name="cours" required>
+
+        <label>Note (/10)</label>
+        <input type="number" name="note_cours" min="0" max="10" step="0.1" required>
+
+        <label>Clarté (/10)</label>
+        <input type="number" name="clarte" min="0" max="10" step="0.1" required>
+
+        <label>Organisation (/10)</label>
+        <input type="number" name="organisation" min="0" max="10" step="0.1" required>
+
+        <label>Difficulté (/10)</label>
+        <input type="number" name="difficulte" min="0" max="10" step="0.1" required>
+
+        <button type="submit">Envoyer</button>
+    </form>
+
+    <a href="/dashboard">Voir Dashboard</a>
+
+</div>
+</body>
+</html>

@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Dashboard</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <style>
+        body {
+            font-family: Arial;
+            background-color: #f4f6f8;
+            padding: 20px;
+        }
+
+        h2 {
+            text-align: center;
+        }
+
+        .card {
+            background: white;
+            padding: 15px;
+            margin: 10px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            display: inline-block;
+            width: 30%;
+            text-align: center;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+            background: white;
+        }
+
+        th, td {
+            padding: 10px;
+            border: 1px solid #ddd;
+            text-align: center;
+        }
+
+        th {
+            background-color: #007BFF;
+            color: white;
+        }
+
+        canvas {
+            margin-top: 30px;
+        }
+    </style>
+</head>
+
+<body>
+
+<h2>Dashboard</h2>
+
+<div class="card">
+    <h3>Moyenne</h3>
+    <p>{{ moyenne }}</p>
+</div>
+
+<div class="card">
+    <h3>Total évaluations</h3>
+    <p>{{ data|length }}</p>
+</div>
+
+<div class="card">
+    <h3>Note max</h3>
+    <p>{{ data | map(attribute='note_cours') | max }}</p>
+</div>
+
+<!-- Tableau -->
+<table>
+<tr>
+<th>Cours</th>
+<th>Note</th>
+<th>Clarté</th>
+<th>Organisation</th>
+<th>Difficulté</th>
+</tr>
+
+{% for row in data %}
+<tr>
+<td>{{ row.cours }}</td>
+<td>{{ row.note_cours }}</td>
+<td>{{ row.clarte }}</td>
+<td>{{ row.organisation }}</td>
+<td>{{ row.difficulte }}</td>
+</tr>
+{% endfor %}
+</table>
+
+<!-- Graphique -->
+<canvas id="chart"></canvas>
+
+<script>
+const labels = {{ data | map(attribute='cours') | list | safe }};
+const notes = {{ data | map(attribute='note_cours') | list | safe }};
+
+const ctx = document.getElementById('chart').getContext('2d');
+
+new Chart(ctx, {
+    type: 'bar',
+    data: {
+        labels: labels,
+        datasets: [{
+            label: 'Notes des cours',
+            data: notes
+        }]
+    }
+});
+</script>
+
+<br>
+<a href="/">Retour</a> | <a href="/analysis">Analyse</a>
+
+</body>
+</html>
