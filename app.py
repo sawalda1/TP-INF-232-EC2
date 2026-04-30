@@ -15,6 +15,6 @@ app.register_blueprint(collect_bp)
 app.register_blueprint(dashboard_bp)
 app.register_blueprint(analysis_bp)
 
-if name == "main":
+if__name__ == "__main__":
     port = int(os.environ.get("PORT", 10000))
     app.run(host="0.0.0.0", port=port)
